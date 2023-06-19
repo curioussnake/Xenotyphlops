@@ -1,0 +1,20 @@
+{
+	"id" : "97641436-064d-4862-a84b-53d8e27ae82e",
+    "priority": 10,
+	"request" : {
+		"urlPattern" : "/*",
+		"method" : "ANY"
+	},
+	"response" : {
+		"status" : 404,
+		"jsonBody" : {
+			"error": "Page not found!"
+		},
+		"headers" : {
+		  "Content-Type" : "application/json"
+		}
+	},
+	"uuid" : "97641436-064d-4862-a84b-53d8e27ae82e",
+	"persistent" : true,
+	"insertionIndex" : 0
+}

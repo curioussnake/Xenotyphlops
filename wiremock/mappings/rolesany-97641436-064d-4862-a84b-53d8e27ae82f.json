@@ -1,0 +1,23 @@
+{
+	"id" : "97641436-064d-4862-a84b-53d8e27ae82f",
+    "priority": 9,
+	"request" : {
+		"urlPattern" : "/roles/([a-z1-9]*)",
+		"method" : "ANY",
+		"headers": {
+			"token": {
+				"doesNotMatch": "123456789"
+			}
+		}
+	},
+	"response" : {
+		"status" : 401,
+		"jsonBody" : {},
+		"headers" : {
+		  "Content-Type" : "application/json"
+		}
+	},
+	"uuid" : "97641436-064d-4862-a84b-53d8e27ae82f",
+	"persistent" : true,
+	"insertionIndex" : 0
+}

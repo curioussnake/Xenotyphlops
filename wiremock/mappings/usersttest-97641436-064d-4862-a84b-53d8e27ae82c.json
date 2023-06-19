@@ -1,0 +1,21 @@
+{
+	"id" : "97641436-064d-4862-a84b-53d8e27ae82c",
+	"request" : {
+		"url" : "/users/ttest",
+		"method" : "GET"
+	},
+	"response" : {
+		"status" : 200,
+		"jsonBody" : {
+			"id": "ttest",
+			"name": "Test Test",
+			"email": "ttest@sii.pl"
+		},
+		"headers" : {
+		  "Content-Type" : "application/json"
+		}
+	},
+	"uuid" : "97641436-064d-4862-a84b-53d8e27ae82c",
+	"persistent" : true,
+	"insertionIndex" : 0
+}

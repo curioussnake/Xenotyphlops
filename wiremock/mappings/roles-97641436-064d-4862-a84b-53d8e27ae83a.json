@@ -1,0 +1,29 @@
+{
+	"id" : "97641436-064d-4862-a84b-53d8e27ae83a",
+	"request" : {
+		"urlPattern" : "/roles",
+		"method" : "GET",
+		"headers": {
+			"token": {
+				"equalTo": "123456789"
+			}
+		}
+	},
+	"response" : {
+		"status" : 200,
+		"jsonBody" : {
+			"roles": [
+				"ADMIN",
+				"MODERATOR",
+				"VIEWER",
+				"NONE"
+			]
+		},
+		"headers" : {
+		  "Content-Type" : "application/json"
+		}
+	},
+	"uuid" : "97641436-064d-4862-a84b-53d8e27ae83a",
+	"persistent" : true,
+	"insertionIndex" : 0
+}
