@@ -4,7 +4,7 @@ from flask_service.app import main_service
 from werkzeug.exceptions import abort
 from flask_service.app.utils.user import User
 from flask_service.app.utils.error_handling import bad_request_response
-from flask_service.app.in_mem_db.data_base import in_memory_db_users
+from flask_service.app.in_mem_db.data_base import in_memory_db_users, in_memory_db_roles
 
 
 @main_service.route('/users', methods=["GET"])
@@ -36,6 +36,11 @@ def add_user():
             return bad_request_response(
                 description=f"Lack of required data in body: {set(['name', 'lastname']) - set(request.json.keys())}!"
             )
+        if "role" in request.json.keys():
+            if request.json["role"] not in in_memory_db_roles.keys():
+                return bad_request_response(
+                    description=f"Role: {request.json['role']} not allowed!"
+                )
         new_user = User(
             name=request.json["name"],
             lastname=request.json["lastname"],
@@ -65,14 +70,19 @@ def update_user(user_id: str):
             return bad_request_response(
                 description=f"Lack of required data in body: {set(['name', 'lastname']) - set(request.json.keys())}!"
             )
+        if "role" in request.json.keys():
+            if request.json["role"] not in in_memory_db_roles.keys():
+                return bad_request_response(
+                    description=f"Role: {request.json['role']} not allowed!"
+                )
         user_to_update = user[0]
         user_to_update.name = request.json["name"]
         user_to_update.lastname = request.json["lastname"]
         user_to_update.role = request.json["role"] if "role" in request.json.keys() else "NONE"
         accept = request.headers.get("Accept")
         if accept == "application/xml":
-            return user_to_update.xml(), 201
-        return user_to_update.json(), 201
+            return user_to_update.xml(), 200
+        return user_to_update.json(), 200
     abort(
         status=422,
         description=f"Incorrect content type: {content_type}!"

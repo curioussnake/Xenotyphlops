@@ -38,7 +38,7 @@ def handle_unprocessable_entity(e):
     print(f"e: {str(e)}")
     return json.dumps(
         {
-            "error": "Not Found",
+            "error": "Unprocessable entity",
             "message": e.description
         }
     ), 422
