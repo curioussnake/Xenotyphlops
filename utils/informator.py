@@ -10,6 +10,8 @@ class Informator:
 
 
     def get_informations(resp: requests):
+        print("jestem tu")
+        print("response:" + str(resp))
         print(f"resp.status_code: {resp.status_code}")
         print(f"resp.headers: {resp.headers}")
         print(f"resp.text: {resp.json()}")
