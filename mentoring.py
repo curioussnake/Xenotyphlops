@@ -1,8 +1,8 @@
 import json
 import requests
 
-from Xenotyphlops.services.catfact import CatFact
-from Xenotyphlops.utils.informator import Informator
+from services.catfact import CatFact
+from utils.informator import Informator
 from services.zipcode import ZipCode
 
 
