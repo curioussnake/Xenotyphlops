@@ -7,7 +7,6 @@ class Informator:
         self._url = url
 
     def get_informations(self, resp: requests):
-        print("jestem tu")
         print("response:" + str(resp))
         print(f"resp.status_code: {resp.status_code}")
         print(f"resp.headers: {resp.headers}")

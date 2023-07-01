@@ -27,13 +27,7 @@ print(respc)
 informations = Informator
 informations.get_informations(respz)
 informations.get_informations(respc)
-#Najebalem troche badziewia, zeby to sprawdzic jak nie moglem zasnac xDDD
-# print(f"resp.status_code: {respz.status_code}")
-# print(f"resp.status_code: {respc.status_code}")
-# print(f"resp.headers: {respz.headers}")
-# print(f"resp.headers: {respc.headers}")
-# print(f"resp.text: {respz.json()}")
-# print(f"resp.text: {respc.json()}")
+
 print(respz.history)
 
 
