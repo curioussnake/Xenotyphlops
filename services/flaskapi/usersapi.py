@@ -18,7 +18,6 @@ class UsersApi:
     def set_headers(self, header) -> str:
         return f"accept: {header}" #Czy to na pewno tak?
 
-    # TODO w poniższych metodach używać Requester
     def get_list_of_all_users(self) -> requests.Response:
         return self.requester.requester(
             method="GET",
@@ -33,7 +32,7 @@ class UsersApi:
             headers=self.set_headers("application/xml")
         )
 
-    def create_user(self, data: dict, firstname: str, lastname: str, role: str) -> requests.Response:
+    def create_user(self, firstname: str, lastname: str, role: str) -> requests.Response:
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",

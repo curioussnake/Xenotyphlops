@@ -13,7 +13,7 @@ class Requester:
         # TODO dodać aktualicacje headers i ich przekazanie do request (jak aktualizować wartości w słowniku?)
         response = requests.request(
             method=method,
-            url=f"{url}{'/' if path != '' else ''}{path}",  # TODO do przemyślenia czy nie można prościej
+            url=f"{url}{'/' if path != '' else ''}{path}",
             data=data
         )
         logging.info(f"resp.status_code: {response.status_code}")
