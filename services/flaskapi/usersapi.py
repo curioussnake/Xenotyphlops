@@ -11,6 +11,9 @@ class UsersApi:
         self._url = f"{url}/users"
         self.user_id = "1000"
         self.header = "application/json"
+        self.firstname = "John"
+        self.lastname = "Doe"
+        self.role = "User"
 
     def set_headers(self, header) -> str:
         return f"accept: {header}" #Czy to na pewno tak?
@@ -30,11 +33,16 @@ class UsersApi:
             headers=self.set_headers("application/xml")
         )
 
-    def create_user(self, name: str, lastname: str, role: str) -> requests.Response:
+    def create_user(self, data: dict, firstname: str, lastname: str, role: str) -> requests.Response:
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",
-            headers=self.set_headers("application/xml")
+            headers=self.set_headers("application/xml"),
+            data={#jak przekazywac body z data??
+                "firstname": firstname,
+                "lastname": lastname,
+                "role": role
+            }
         )
 
     def update_user(self, user_id: str ,user_data: Dict[str, Any]) -> requests.Response:
@@ -48,3 +56,5 @@ class UsersApi:
 
     def update_user_requests(self, user_id: str ,user_data: Dict[str, Any]) -> requests.Response:
         return requests.put(url=f"{self._url}/{user_id}", data=user_data)
+
+    # Jak przekazywac te dane do body do
