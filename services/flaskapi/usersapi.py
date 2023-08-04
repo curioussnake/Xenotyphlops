@@ -10,50 +10,52 @@ class UsersApi:
         self.requester = Requester()
         self._url = f"{url}/users"
         self.user_id = "1000"
-        self.header = "application/json"
-        self.firstname = "John"
-        self.lastname = "Doe"
-        self.role = "User"
 
-    def set_headers(self, header) -> str:
-        return f"accept: {header}" #Czy to na pewno tak?
+    # TODO do set_header header ma byc headers i zawierac naglowki ktore chcesz
+    #      zaaktualizowac a w metodzie naglowki maja byc zdefiniowane z defaultowymi wartosciami.
+    #      Jezeli zostanie przekazany naglowek ktory nie jest zdefiniowany wsrod naglowkow, ma zostac dodany.
+    def set_header(self, header) -> Dict[str, Any]:
+        return {"accept": header}
 
     def get_list_of_all_users(self) -> requests.Response:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}",
-            headers=self.set_headers("application/xml")
+            headers=self.set_header("application/xml")
         )
 
     def get_user_by_id(self, user_id: str) -> requests.Response:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}/{self.user_id}",
-            headers=self.set_headers("application/xml")
+            headers=self.set_header("application/xml")
         )
 
-    def create_user(self, firstname: str, lastname: str, role: str) -> requests.Response:
+    def create_user(self, firstname: str, lastname: str, **kwargs) -> requests.Response: #Jezeli jest none to znaczy, ze wartosc jest opcjonalna
+        body = {
+            "firstname": firstname,
+            "lastname": lastname,
+        }
+        if "role" in kwargs.keys():
+            body.update({"role": kwargs["role"]})
+
+            # jezeli wartosc role jest opcjonalna i nie chcemy jej definiowac jako role: str = None, to mozna wykorzystac
+            # kwargs jak w definicji powyzej. Z wykorzystaniem metody update na slowniku body.
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",
-            headers=self.set_headers("application/xml"),
-            data={#jak przekazywac body z data??
+            headers=self.set_header("application/xml"),
+            data=body
+        )
+
+    def update_user(self, user_id: str, firstname: str, lastname: str, role: str) -> requests.Response:
+        return self.requester.requester(
+            method="PUT",
+            url=f"{self._url}/{self.user_id}",
+            headers=self.set_header("application/xml"),
+             data={#jak przekazywac body z data??
                 "firstname": firstname,
                 "lastname": lastname,
                 "role": role
-            }
+             }
         )
-
-    def update_user(self, user_id: str ,user_data: Dict[str, Any]) -> requests.Response:
-        return requests.put(url=f"{self._url}/{user_id}", data=user_data)
-
-    def get_user_by_id_requests(self, user_id: str) -> requests.Response:
-        return requests.get(url=f"{self._url}/{user_id}")
-
-    def create_user_requests(self, user_data: dict) -> requests.Response:
-        return requests.post(url=f"{self._url}", data=user_data)
-
-    def update_user_requests(self, user_id: str ,user_data: Dict[str, Any]) -> requests.Response:
-        return requests.put(url=f"{self._url}/{user_id}", data=user_data)
-
-    # Jak przekazywac te dane do body do
