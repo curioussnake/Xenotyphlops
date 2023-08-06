@@ -9,7 +9,6 @@ class UsersApi:
     def __init__(self, url):
         self.requester = Requester()
         self._url = f"{url}/users"
-        self.user_id = "1000"
 
     # TODO do set_header header ma byc headers i zawierac naglowki ktore chcesz
     #      zaaktualizowac a w metodzie naglowki maja byc zdefiniowane z defaultowymi wartosciami.
@@ -53,7 +52,7 @@ class UsersApi:
             method="PUT",
             url=f"{self._url}/{self.user_id}",
             headers=self.set_header("application/xml"),
-             data={#jak przekazywac body z data??
+             data={
                 "firstname": firstname,
                 "lastname": lastname,
                 "role": role
