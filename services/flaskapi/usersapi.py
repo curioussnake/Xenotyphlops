@@ -30,9 +30,9 @@ class UsersApi:
             headers=self.set_header("application/xml")
         )
 
-    def create_user(self, firstname: str, lastname: str, **kwargs) -> requests.Response: #Jezeli jest none to znaczy, ze wartosc jest opcjonalna
+    def create_user(self,name: str, lastname: str, **kwargs) -> requests.Response: #Jezeli jest none to znaczy, ze wartosc jest opcjonalna
         body = {
-            "firstname": firstname,
+            "name": name,
             "lastname": lastname,
         }
         if "role" in kwargs.keys():
