@@ -10,9 +10,6 @@ class RolesApi:
         self.requester = Requester()
         self._url = f"{url}/roles"
 
-    # TODO do set_header header ma byc headers i zawierac naglowki ktore chcesz
-    #      zaaktualizowac a w metodzie naglowki maja byc zdefiniowane z defaultowymi wartosciami.
-    #      Jezeli zostanie przekazany naglowek ktory nie jest zdefiniowany wsrod naglowkow, ma zostac dodany.
     def set_header(self, header) -> Dict[str, Any]:
         return {"accept": header}
 

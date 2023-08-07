@@ -4,6 +4,8 @@ import requests
 
 from typing import Dict, Any
 from utils.requester import Requester
+
+
 class UsersApi:
 
     def __init__(self, url):
@@ -26,11 +28,12 @@ class UsersApi:
     def get_user_by_id(self, user_id: str) -> requests.Response:
         return self.requester.requester(
             method="GET",
-            url=f"{self._url}/{self.user_id}",
+            url=f"{self._url}/{user_id}",
             headers=self.set_header("application/xml")
         )
 
-    def create_user(self,name: str, lastname: str, **kwargs) -> requests.Response: #Jezeli jest none to znaczy, ze wartosc jest opcjonalna
+    def create_user(self, name: str, lastname: str,
+                    **kwargs) -> requests.Response:  # Jezeli jest none to znaczy, ze wartosc jest opcjonalna
         body = {
             "name": name,
             "lastname": lastname,
@@ -47,14 +50,14 @@ class UsersApi:
             data=body
         )
 
-    def update_user(self, user_id: str, firstname: str, lastname: str, role: str) -> requests.Response:
+    def update_user(self, user_id: str, name: str, lastname: str, role: str) -> requests.Response:
         return self.requester.requester(
             method="PUT",
-            url=f"{self._url}/{self.user_id}",
+            url=f"{self._url}/{user_id}",
             headers=self.set_header("application/xml"),
-             data={
-                "firstname": firstname,
+            data={
+                "name": name,
                 "lastname": lastname,
                 "role": role
-             }
+            }
         )
