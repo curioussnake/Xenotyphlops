@@ -1,3 +1,5 @@
+import logging
+
 import requests
 
 
@@ -7,7 +9,8 @@ class Informator:
         self._url = url
 
     def get_informations(self, resp: requests):
-        print("response:" + str(resp))
-        print(f"resp.status_code: {resp.status_code}")
-        print(f"resp.headers: {resp.headers}")
-        print(f"resp.text: {resp.json()}")
+        logging.info("response:" + str(resp))
+        logging.info(f"resp.status_code: {resp.status_code}")
+        logging.info(f"resp.headers: {resp.headers}")
+        logging.info(f"resp.text: {resp.json()}")
+
