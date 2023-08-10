@@ -29,7 +29,7 @@ class UsersApi:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}/{user_id}",
-            headers=self.set_header("application/xml")
+            headers=self.validation.set_header("application/xml")
         )
 
     def create_user(self, name: str, lastname: str, **kwargs) -> requests.Response:  # Jezeli jest none to znaczy, ze wartosc jest opcjonalna
@@ -45,7 +45,7 @@ class UsersApi:
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",
-            headers=self.set_header("application/xml"),
+            headers=self.validation.set_header("application/xml"),
             data=body
         )
 
@@ -53,7 +53,7 @@ class UsersApi:
         return self.requester.requester(
             method="PUT",
             url=f"{self._url}/{user_id}",
-            headers=self.set_header("application/xml"),
+            headers=self.validation.set_header("application/xml"),
             data={
                 "name": name,
                 "lastname": lastname,
