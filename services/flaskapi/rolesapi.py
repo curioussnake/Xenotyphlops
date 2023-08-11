@@ -18,3 +18,10 @@ class RolesApi:
             url=f"{self._url}",
             headers=self.validation.set_header("application/xml")
         )
+
+    def get_role_by_id(self, role_id: str) -> requests.Response:
+        return self.requester.requester(
+            method="GET",
+            url=f"{self._url}/{role_id}",
+            headers=self.validation.set_header("application/xml")
+        )
