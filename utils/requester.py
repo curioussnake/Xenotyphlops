@@ -10,11 +10,12 @@ class Requester:
             data = json.dumps(body)
         else:
             data = body
-        # TODO dodać aktualicacje headers i ich przekazanie do request (jak aktualizować wartości w słowniku?)
+
         response = requests.request(
             method=method,
             url=f"{url}{'/' if path != '' else ''}{path}",
-            data=data
+            data=data,
+            headers=kwargs.get("headers", {})
         )
         logging.info(f"resp.status_code: {response.status_code}")
         logging.info(f"resp.headers: {response.headers}")

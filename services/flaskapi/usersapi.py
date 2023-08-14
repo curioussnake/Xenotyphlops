@@ -45,7 +45,7 @@ class UsersApi:
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",
-            headers=self.validation.set_header("application/xml"),
+            headers=self.validation.set_header("application/json"),
             data=body
         )
 
@@ -53,7 +53,7 @@ class UsersApi:
         return self.requester.requester(
             method="PUT",
             url=f"{self._url}/{user_id}",
-            headers=self.validation.set_header("application/xml"),
+            headers=self.validation.set_header("application/json"),
             data={
                 "name": name,
                 "lastname": lastname,
