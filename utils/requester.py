@@ -17,8 +17,8 @@ class Requester:
             data=data,
             headers=kwargs.get("headers", {})
         )
-        logging.info(f"resp.status_code: {response.status_code}")
-        logging.info(f"resp.headers: {response.headers}")
-        logging.info(f"resp.text: {response.text}")
+        logging.info(f"response.status_code: {response.status_code}")
+        logging.info(f"response.headers: {response.headers}")
+        logging.info(f"response.text: {response.text}")
 
         return response
