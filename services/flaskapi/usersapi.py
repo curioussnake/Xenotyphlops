@@ -46,7 +46,7 @@ class UsersApi:
             method="POST",
             url=f"{self._url}",
             headers=self.validation.set_header("application/json"),
-            data=body
+            body=body
         )
 
     def update_user(self, user_id: str, name: str, lastname: str, role: str) -> requests.Response:
@@ -54,7 +54,7 @@ class UsersApi:
             method="PUT",
             url=f"{self._url}/{user_id}",
             headers=self.validation.set_header("application/json"),
-            data={
+            body={
                 "name": name,
                 "lastname": lastname,
                 "role": role

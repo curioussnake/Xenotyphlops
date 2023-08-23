@@ -11,10 +11,12 @@ class Requester:
         if "content-type" not in headers:
             headers["content-type"] = "application/json"
 
-        if "headers" in kwargs.keys() and "content-type" in kwargs["headers"].keys():
+        if "application/json" == headers["content-type"]:
             data = json.dumps(body)
         else:
             data = body
+
+        print(data)
 
         response = requests.request(
             method=method,
