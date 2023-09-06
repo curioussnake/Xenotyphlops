@@ -7,3 +7,4 @@ def test_get_role_by_id(roles_api):
     role_id = 1111
     get_role = roles_api.get_role_by_id(role_id)
     print("role with id: " + role_id + " is " + get_role.text)
+
