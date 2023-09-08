@@ -21,14 +21,14 @@ class UsersApi:
             headers=self.validation.set_header(accept)
         )
 
-    def get_user_by_id(self, user_id: str) -> requests.Response:
+    def get_user_by_id(self, user_id: str, accept: str = "application/xml") -> requests.Response:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}/{user_id}",
-            headers=self.validation.set_header("application/xml")
+            headers=self.validation.set_header(accept)
         )
 
-    def create_user(self, name: str, lastname: str, **kwargs) -> requests.Response:  # Jezeli jest none to znaczy, ze wartosc jest opcjonalna
+    def create_user(self, name: str, lastname: str, accept: str = "application/json", **kwargs) -> requests.Response:  # Jezeli jest none to znaczy, ze wartosc jest opcjonalna
         body = {
             "name": name,
             "lastname": lastname,
@@ -42,15 +42,15 @@ class UsersApi:
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",
-            headers=self.validation.set_header("application/json"),
+            headers=self.validation.set_header(accept),
             body=body
         )
 
-    def update_user(self, user_id: str, name: str, lastname: str, role: str) -> requests.Response:
+    def update_user(self, user_id: str, name: str, lastname: str, role: str, accept: str = "application/json") -> requests.Response:
         return self.requester.requester(
             method="PUT",
             url=f"{self._url}/{user_id}",
-            headers=self.validation.set_header("application/json"),
+            headers=self.validation.set_header(accept),
             body={
                 "name": name,
                 "lastname": lastname,

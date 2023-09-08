@@ -12,16 +12,16 @@ class RolesApi:
         self._url = f"{url}/roles"
         self.validation = Validation()
 
-    def get_list_of_all_roles(self) -> requests.Response:
+    def get_list_of_all_roles(self, accept: str = "application/json") -> requests.Response:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}",
-            headers=self.validation.set_header("application/xml")
+            headers=self.validation.set_header(accept)
         )
 
-    def get_role_by_id(self, role_id: str) -> requests.Response:
+    def get_role_by_id(self, role_id: str, accept: str = "application/json") -> requests.Response:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}/{role_id}",
-            headers=self.validation.set_header("application/xml")
+            headers=self.validation.set_header(accept)
         )
