@@ -14,15 +14,11 @@ class UsersApi:
         self._url = f"{url}/users"
         self.validation = Validation()
 
-    # TODO do set_header header ma byc headers i zawierac naglowki ktore chcesz
-    #      zaaktualizowac a w metodzie naglowki maja byc zdefiniowane z defaultowymi wartosciami.
-    #      Jezeli zostanie przekazany naglowek ktory nie jest zdefiniowany wsrod naglowkow, ma zostac dodany.
-
-    def get_list_of_all_users(self) -> requests.Response:
+    def get_list_of_all_users(self, accept: str = "application/json") -> requests.Response:
         return self.requester.requester(
             method="GET",
             url=f"{self._url}",
-            headers=self.validation.set_header("application/xml")
+            headers=self.validation.set_header(accept)
         )
 
     def get_user_by_id(self, user_id: str) -> requests.Response:
@@ -42,6 +38,7 @@ class UsersApi:
 
             # jezeli wartosc role jest opcjonalna i nie chcemy jej definiowac jako role: str = None, to mozna wykorzystac
             # kwargs jak w definicji powyzej. Z wykorzystaniem metody update na slowniku body.
+
         return self.requester.requester(
             method="POST",
             url=f"{self._url}",
