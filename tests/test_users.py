@@ -24,7 +24,11 @@ def test_create_user(users_api):
 def test_get_user_by_id_positive(users_api):
     user_id = "tfirsttest"
     get_user_by_id = users_api.get_user_by_id(user_id)
-    print("user with id =" + user_id + " is: " + get_user_by_id.text)
+    assert get_user_by_id.status_code == 200
+    get_user_by_id_json = get_user_by_id.json()
+    assert get_user_by_id_json["name"] == "Test"
+    assert get_user_by_id_json["lastname"] == "FirstTest"
+    assert get_user_by_id_json["role"] == "NONE"
 
 
 def test_update_user(users_api):
