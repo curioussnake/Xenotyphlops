@@ -1,6 +1,7 @@
 def test_get_all_users(users_api):
     all_users = users_api.get_list_of_all_users()
     print("all users result: " + all_users.text)
+    assert all_users.status_code == 200
     assert len(all_users.json()) == 2
 
 
@@ -8,7 +9,7 @@ def test_create_user(users_api):
     all_users = users_api.get_list_of_all_users()
     create_user = users_api.create_user("Pedro", "Sanchez", role="MODERATOR")
     assert create_user.status_code == 201
-    new_user = users_api.get_user_by_id(create_user.json()["id"])
+    new_user = users_api.get_user_by_id(create_user.json()["id"], accept="application/json")
     # print(new_user.json()["name"])
     assert new_user.status_code == 200
     new_user_json = new_user.json()
@@ -23,9 +24,11 @@ def test_create_user(users_api):
 
 def test_get_user_by_id_positive(users_api):
     user_id = "tfirsttest"
-    get_user_by_id = users_api.get_user_by_id(user_id)
+    get_user_by_id = users_api.get_user_by_id(user_id, accept="application/json")
     assert get_user_by_id.status_code == 200
     get_user_by_id_json = get_user_by_id.json()
+    # print("here is my printed stuff")
+    # print(get_user_by_id_json)
     assert get_user_by_id_json["name"] == "Test"
     assert get_user_by_id_json["lastname"] == "FirstTest"
     assert get_user_by_id_json["role"] == "NONE"
