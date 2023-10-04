@@ -16,8 +16,8 @@ def test_create_user(users_api):
     # print(new_user.json()["name"])
     assert new_user.status_code == 200
     new_user_json = new_user.json()
-    expect(new_user_json["name"] == "Pablo", "Incorrect name!")
-    expect(new_user_json["surname"] == "Pueblo", "Incorrect surname!")
+    expect(new_user_json["name"] == "Pedro", "Incorrect name!")
+    expect(new_user_json["surname"] == "Sanchez", "Incorrect surname!")
     expect(new_user_json["role"] == "MODERATOR", "Incorrect role!") #To beda miekkie asercje
     all_users_after_creation = users_api.get_list_of_all_users()
     assert all_users_after_creation.status_code == 200
@@ -39,7 +39,13 @@ def test_get_user_by_id_positive(users_api):
 def test_update_user(users_api):
     user_id = "tfirsttest"
     get_user_by_id = users_api.get_user_by_id(user_id)
+    assert get_user_by_id.status_code == 200
     update_user = users_api.update_user("tfirsttest", "Pablo", "Pueblo", "MODERATOR")
+    assert update_user.status_code == 200
+    get_user_by_id_json = get_user_by_id.json()
+    expect(get_user_by_id_json["names"] == "Pablo")
+    expect(get_user_by_id_json["surname"] == "Pueblo")
+    expect(get_user_by_id_json["role"] == "MODERATOR")
     print("user with id =" + user_id + " and data " + get_user_by_id.content + " updated with: " + update_user.content)
 
     #Delayed assert (miekka asercja)
