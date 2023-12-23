@@ -32,8 +32,6 @@ def test_get_user_by_id_positive(users_api):
     get_user_by_id = users_api.get_user_by_id(user_id, accept="application/json")
     assert get_user_by_id.status_code == 200
     get_user_by_id_json = get_user_by_id.json()
-    # print("here is my printed stuff")
-    # print(get_user_by_id_json)
     expect(get_user_by_id_json["name"] == "Test")
     expect(get_user_by_id_json["lastname"] == "FirstTest")
     expect(get_user_by_id_json["role"] == "NONE")
@@ -52,7 +50,6 @@ def test_update_user(users_api):
     expect(get_user_by_id_after_update["lastname"] == "Pueblo")
     expect(get_user_by_id_after_update["role"] == "MODERATOR")
     assert_expectations()
-
 
 
 def test_delete_user(users_api):
