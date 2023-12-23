@@ -5,19 +5,22 @@ def test_get_all_users(users_api):
     all_users = users_api.get_list_of_all_users()
     print("all users result: " + all_users.text)
     assert all_users.status_code == 200
-    expect(len(all_users.json()) == 2, "Number of accounts is incorrect!")
+    amount_of_users: int = len(all_users.json())
+    expect(amount_of_users == 3, "Number of accounts is incorrect!")
+    print("Amount of users is: ")
+    print(amount_of_users)
 
 
 def test_create_user(users_api):
     all_users = users_api.get_list_of_all_users()
-    create_user = users_api.create_user("Pedro", "Sanchez", role="MODERATOR")
+    create_user = users_api.create_user("PSanchez", "Pedro", "Sanchez", role="MODERATOR")
     assert create_user.status_code == 201
     new_user = users_api.get_user_by_id(create_user.json()["id"], accept="application/json")
     # print(new_user.json()["name"])
     assert new_user.status_code == 200
     new_user_json = new_user.json()
     expect(new_user_json["name"] == "Pedro", "Incorrect name!")
-    expect(new_user_json["surname"] == "Sanchez", "Incorrect surname!")
+    expect(new_user_json["lastname"] == "Sanchez", "Incorrect surname!")
     expect(new_user_json["role"] == "MODERATOR", "Incorrect role!") #To beda miekkie asercje
     all_users_after_creation = users_api.get_list_of_all_users()
     assert all_users_after_creation.status_code == 200

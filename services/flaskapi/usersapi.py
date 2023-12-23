@@ -28,8 +28,9 @@ class UsersApi:
             headers=self.validation.set_header(accept)
         )
 
-    def create_user(self, name: str, lastname: str, accept: str = "application/json", **kwargs) -> requests.Response:  # Jezeli jest none to znaczy, ze wartosc jest opcjonalna
+    def create_user(self, user_id: str, name: str, lastname: str, accept: str = "application/json", **kwargs) -> requests.Response:  # Jezeli jest none to znaczy, ze wartosc jest opcjonalna
         body = {
+            "id": user_id,
             "name": name,
             "lastname": lastname,
         }
