@@ -12,29 +12,28 @@ def test_get_all_users(users_api):
 
 def test_create_user(users_api):
     all_users = users_api.get_list_of_all_users()
-    create_user = users_api.create_user("Juan", "Gonzalez", role="MODERATOR")
+    create_user = users_api.create_user("Rodriguez", "Gonzalez", role="MODERATOR")
     assert create_user.status_code == 201
     new_user = users_api.get_user_by_id(create_user.json()["id"], accept="application/json")
-    # print(new_user.json()["name"])
     assert new_user.status_code == 200
     new_user_json = new_user.json()
-    expect(new_user_json["name"] == "Juan", "Incorrect name!")
+    expect(new_user_json["name"] == "Rodriguez", "Incorrect name!")
     expect(new_user_json["lastname"] == "Gonzalez", "Incorrect surname!")
     expect(new_user_json["role"] == "MODERATOR", "Incorrect role!")  # To beda miekkie asercje
     all_users_after_creation = users_api.get_list_of_all_users()
     assert all_users_after_creation.status_code == 200
-    assert len(all_users.json()) < len(all_users_after_creation.json())  # To bedzie miekka asercja
+    expect(len(all_users.json()) < len(all_users_after_creation.json()))  # To bedzie miekka asercja
     assert_expectations()
 
 
 def test_get_user_by_id_positive(users_api):
-    user_id = "tfirsttest"
+    user_id = "rgonzalez"
     get_user_by_id = users_api.get_user_by_id(user_id, accept="application/json")
     assert get_user_by_id.status_code == 200
     get_user_by_id_json = get_user_by_id.json()
-    expect(get_user_by_id_json["name"] == "Test")
-    expect(get_user_by_id_json["lastname"] == "FirstTest")
-    expect(get_user_by_id_json["role"] == "NONE")
+    expect(get_user_by_id_json["name"] == "Rodriguez")
+    expect(get_user_by_id_json["lastname"] == "Gonzalez")
+    expect(get_user_by_id_json["role"] == "MODERATOR")
     assert_expectations()
 
 
