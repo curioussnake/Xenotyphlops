@@ -52,7 +52,7 @@ def test_update_user(users_api):
 
 
 def test_delete_user(users_api):
-    user_id = "tfirsttest"
+    user_id = "rgonzalez"
     get_user_by_id = users_api.get_user_by_id(user_id)
     assert get_user_by_id.status_code == 200
     delete_user = users_api.delete_user(user_id)
