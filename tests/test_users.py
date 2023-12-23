@@ -48,6 +48,17 @@ def test_update_user(users_api):
     expect(get_user_by_id_json["role"] == "MODERATOR")
     print("user with id =" + user_id + " and data " + get_user_by_id.content + " updated with: " + update_user.content)
 
+def test_delete_user(users_api):
+    user_id = "tfirsttest"
+    get_user_by_id = users_api.get_user_by_id(user_id)
+    assert get_user_by_id.status_code == 200
+    delete_user = users_api.delete_user(user_id)
+    assert delete_user.status_code == 200
+    get_deleted_user_by_id = users_api.get_user_by_id(user_id)
+    assert get_deleted_user_by_id.status_code == 404
+
+
+
     #Delayed assert (miekka asercja)
     #Zweryfikowac w asercji: 1.Kod odpowiedzi, 2.Dane, 3.Jezeli jest
     # POST lub UPDATE to zweryfikowac czy dane sa poprawnie zaaktualizowane

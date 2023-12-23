@@ -16,15 +16,17 @@ def users():
 
 
 @main_service.route('/users/<user_id>', methods=["DELETE"])
-def delete_users(user_id: str):
-    accept = request.headers.get("Accept")
-    if accept == "application/xml":
-        return f"<users>{''.join([x.xml() for x in in_memory_db_users])}</users>"
-    return [x.json() for x in in_memory_db_users]
-#sprawdzasz czy uzytkownik jest na liscie (in_memory_db_users) - czy jest ID
-# - jezeli nie to zwracamy blad 404, jezeli jest to usuwamy wpis (najpierw robimy kopie i zwracamy kopie).
-# w operacjach jest wazne, zeby pracowac na obiektach a nie na indeksach
+def delete_user(user_id: str):
+    user_to_delete = next((x for x in in_memory_db_users if x.id == user_id), None)
 
+    if user_to_delete is not None:
+        in_memory_db_users.remove(user_to_delete)
+        accept = request.headers.get("Accept")
+        if accept == "application/xml":
+            return f"<users>{''.join([x.xml() for x in in_memory_db_users])}</users>"
+        return [x.json() for x in in_memory_db_users]
+    else:
+        abort(404, description=f"User {user_id} not found!")
 
 @main_service.route('/users/<user_id>', methods=["GET"])
 def user_by_id(user_id: str):

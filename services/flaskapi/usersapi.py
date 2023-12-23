@@ -57,3 +57,11 @@ class UsersApi:
                 "role": role
             }
         )
+
+    def delete_user(self, user_id: str, accept: str = "appliation/json") -> requests.Response:
+        return self.requester.requester(
+            method="DELETE",
+            url=f"{self._url}/{user_id}",
+            headers=self.validation.set_header(accept),
+        )
+
