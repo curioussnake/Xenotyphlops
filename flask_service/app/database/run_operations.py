@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from models import Base
 from database_operations import populate_testing_user_data, populate_testing_role_data
 
-# Tworzenie silnika
+# Inicjalizacja silnika
 engine = create_engine('sqlite:///my_database.db', echo=True)
 
 # Sprawdzenie, czy baza danych już istnieje

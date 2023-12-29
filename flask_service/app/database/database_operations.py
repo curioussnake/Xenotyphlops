@@ -1,6 +1,11 @@
 from sqlalchemy import create_engine
 from models import Base, User, Role
+def __init__(self):
+    self.engine = create_engine('sqlite:///my_database.db', echo=True)
+    self.Session = sessionmaker(bind=self.engine)
 
+def get_session(self):
+    return self.Session()
 
 def create_tables():
     engine = create_engine('sqlite:///my_database.db', echo=True)
@@ -24,3 +29,26 @@ def populate_testing_user_data(session):
 
     session.add_all([user1, user2])
     session.commit()
+
+
+def add_user(session, user_name, user_lastname, user_role_id):
+    new_user = User(user_name=user_name, user_lastname=user_lastname, user_role_id=user_role_id)
+
+    session.add_all(new_user)
+    session.commit()
+
+def update_user(session, user_id, user_name, user_lastname, user_role_id):
+    if user_name == "":
+        pass#Pobierz nazwe uzytkownika z id z bazy danych i przypisz do user_name
+    if user_lastname == "":
+        pass# Pobierz nazwe uzytkownika z id z bazy danych i przypisz do user_lastname
+    if user_role_id == "":
+        pass#Pobierz role uzytkownika z id z bazy danych i przypisz do user_role_id
+
+def verify_user(session, user_id):
+    pass#Sprawdz czy uzytkownik istnieje i zwroc potwierdzenie jezeli tak
+
+def delete_user(session, user_id):
+    pass#usun uzytkownika z bazy danych
+
+
